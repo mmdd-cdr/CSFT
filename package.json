@@ -4,6 +4,7 @@
   "description": "create something form templates 的目的是能够从模版创建文件，在便利的同时还能统一代码规范解决一些工程问题。",
 	"keywords": ["vscode", "plugin", "template"],
   "version": "0.0.1",
+  "publisher": "mmdd",
   "engines": {
     "vscode": "^1.73.0"
   },
@@ -44,6 +45,15 @@
         "category": "create form templates"
       }
     ],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "csft.cft",
+					"group": "csft@1",
+					"when": "explorerResourceIsFolder"
+				}
+			]
+		},	
 		"keybindings": [
 			{
 					"command": "csft.cft",

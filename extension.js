@@ -16,15 +16,14 @@ function activate(context) {
 		if(!fileName){
 			return;
 		}
-		const createPath = await getTargetDirectory(uri, fileName);
 		let folderPath = vscode.workspace.workspaceFolders;
-		let fsPath;
-		if (uri) {
-			fsPath = uri.fsPath;
-		} else {
-			fsPath = folderPath[0].uri.fsPath;
-		}
+		const fsPath = folderPath[0].uri.fsPath;
+		const createPath = await getTargetDirectory(uri, fileName);
 		let fsPathUri = vscode.Uri.file(`${fsPath}/${templates}`);
+		if(!fs.existsSync(`${fsPath}/${templates}`)){
+			vscode.window.showErrorMessage("找不到模版文件夹");
+			return;
+		}
 		let fileNameList = await vscode.workspace.fs.readDirectory(fsPathUri);
 		if (fileNameList.length === 0) {
 			vscode.window.showErrorMessage("找不到模版文件");
