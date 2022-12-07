@@ -1,0 +1,75 @@
+{
+  "name": "csft",
+  "displayName": "CSFT",
+  "description": "create something form templates 的目的是能够从模版创建文件，在便利的同时还能统一代码规范解决一些工程问题。",
+	"keywords": ["vscode", "plugin", "template"],
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.73.0"
+  },
+  "categories": [
+    "Other"
+  ],
+	"icon": "assets/logo.png",
+  "activationEvents": [
+    "onCommand:csft.cft"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+		"configuration": {
+			"type": "object",
+			"title": "csft",
+			"properties": {
+				"csft.templatesPath": {
+						"type": "string",
+						"default": "templates",
+						"description": "项目中的模版地址"
+				},
+				"csft.openWhenFinished": {
+						"type": "boolean",
+						"default": true,
+						"description": "是否在每次创建后打开文件"
+				},
+				"csft.setFileExtendedName": {
+						"type": "string",
+						"default": null,
+						"description": "创建文件的默认拓展名"
+				}
+			}
+		},
+    "commands": [
+      {
+        "command": "csft.cft",
+        "title": "从模版创建文件",
+        "category": "create form templates"
+      }
+    ],
+		"keybindings": [
+			{
+					"command": "csft.cft",
+					"key": "ctrl+shift+i",
+					"mac": "cmd+shift+i",
+					"when": "editorTextFocus"
+			}
+		]
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "yarn run lint",
+    "test": "node ./test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.2.0",
+    "@types/mocha": "^9.1.1",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.73.0",
+    "@vscode/test-electron": "^2.1.3",
+    "eslint": "^8.14.0",
+    "glob": "^8.0.1",
+    "mocha": "^9.2.2",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
