@@ -3,6 +3,9 @@
 const vscode = require("vscode");
 const fs = require("fs");
 const lodash = require("lodash");
+const mkdirp = require("mkdirp");
+// import { getDefaultTemplate } from "./templates";
+const createTemplates = require("./templates");
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -64,7 +67,29 @@ function activate(context) {
 		});
 	});
 
+	let initDisposable= vscode.commands.registerCommand("csft.init", async () => {
+		let folderPath = vscode.workspace.workspaceFolders;
+		const fsPath = folderPath[0].uri.fsPath;
+		const templates =  vscode.workspace.getConfiguration().get("csft.templatesPath");
+		const contextPath = `${fsPath}/${templates}`;
+		if (!fs.existsSync(contextPath)) {
+			await mkdirp(contextPath);
+		}
+		const templateName = await promptForParam('请输入初始化模版名称');
+		if(!templateName){
+			vscode.window.showInformationMessage('请输入初始化模版名称');
+			return;
+		}
+		await createFileFormTemplate({
+			createPath:contextPath,
+			fileName:templateName,
+			template:createTemplates,
+			param: {}
+		});
+	});
+
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(initDisposable);
 }
 
 // 选择使用的模版

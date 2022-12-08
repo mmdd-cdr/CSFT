@@ -2,10 +2,33 @@
 
 create something form templates
 ## 功能
-在根目录下创建模版文件夹（默认是templates）
-在默认文件夹下创建你的模版
-可以通过右键菜单来用自定义的模版来生成文件
-也可以使用 ctrl+shift+i 来使用命令创建(mac使用cmd+shift+i)
+使用命令或菜单生成模版 
+<br>
+使用模版快捷生成代码文件
+
+## 食用步骤
+1. `ctrl+shift+p` 打开vscode命令
+2. 输入 `init templates`
+3. 输入模版的名称完成创建模版
+4. 再次使用 `ctrl+shift+p` 打开vscode命令
+5. 输入 `create from templates` 根据引导完成创建
+
+## 命令
+* `init templates` 创建模版
+* `create from templates` 选择模版创建文件
+（也可以在右键菜单中选择）
+
+## 快捷键
+### windows
+
+* `ctrl+shift+i` 创建模版
+* `ctrl+shift+t` 选择模版创建文件
+
+### mac
+
+* `cmd+shift+i` 创建模版
+* `cmd+shift+t` 选择模版创建文件
+
 
 ## 模版文件格式
 ```{

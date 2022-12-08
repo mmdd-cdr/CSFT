@@ -2,8 +2,12 @@
   "name": "csft",
   "displayName": "CSFT",
   "description": "create something form templates 的目的是能够从模版创建文件，在便利的同时还能统一代码规范解决一些工程问题。",
-	"keywords": ["vscode", "plugin", "template"],
-  "version": "0.0.1",
+  "keywords": [
+    "vscode",
+    "plugin",
+    "template"
+  ],
+  "version": "0.0.2",
   "publisher": "mmdd",
   "engines": {
     "vscode": "^1.73.0"
@@ -11,57 +15,74 @@
   "categories": [
     "Other"
   ],
-	"icon": "assets/logo.png",
+  "icon": "assets/logo.png",
   "activationEvents": [
-    "onCommand:csft.cft"
+    "onCommand:csft.cft",
+    "onCommand:csft.init"
   ],
   "main": "./extension.js",
   "contributes": {
-		"configuration": {
-			"type": "object",
-			"title": "csft",
-			"properties": {
-				"csft.templatesPath": {
-						"type": "string",
-						"default": "templates",
-						"description": "项目中的模版地址"
-				},
-				"csft.openWhenFinished": {
-						"type": "boolean",
-						"default": true,
-						"description": "是否在每次创建后打开文件"
-				},
-				"csft.setFileExtendedName": {
-						"type": "string",
-						"default": null,
-						"description": "创建文件的默认拓展名"
-				}
-			}
-		},
+    "configuration": {
+      "type": "object",
+      "title": "csft",
+      "properties": {
+        "csft.templatesPath": {
+          "type": "string",
+          "default": "templates",
+          "description": "项目中的模版地址"
+        },
+        "csft.openWhenFinished": {
+          "type": "boolean",
+          "default": true,
+          "description": "是否在每次创建后打开文件"
+        },
+        "csft.setFileExtendedName": {
+          "type": "string",
+          "default": null,
+          "description": "创建文件的默认拓展名"
+        }
+      }
+    },
     "commands": [
       {
         "command": "csft.cft",
         "title": "从模版创建文件",
         "category": "create form templates"
+      },
+      {
+        "command": "csft.init",
+        "title": "初始化模版",
+        "category": "init templates"
       }
     ],
-		"menus": {
-			"explorer/context": [
-				{
-					"command": "csft.cft",
-					"group": "csft@1",
-					"when": "explorerResourceIsFolder"
-				}
-			]
-		},	
-		"keybindings": [
-			{
-					"command": "csft.cft",
-					"key": "ctrl+shift+i",
-					"mac": "cmd+shift+i",
-					"when": "editorTextFocus"
-			}
-		]
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "csft.init",
+          "group": "csft@1",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "csft.cft",
+          "group": "csft@2",
+          "when": "explorerResourceIsFolder"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "csft.init",
+        "key": "ctrl+shift+i",
+        "mac": "cmd+shift+i",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "csft.cft",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
@@ -80,6 +101,7 @@
     "typescript": "^4.6.4"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "mkdirp": "^1.0.4"
   }
 }
